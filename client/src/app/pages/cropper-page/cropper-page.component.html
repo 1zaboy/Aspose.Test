@@ -1,0 +1,30 @@
+<mat-stepper [linear]="isLinear" #stepper>
+  <mat-step label="Upload">
+    <div class="step">
+      <mat-label>File</mat-label>
+      <input type="file" (change)="selectImg($event)" required>
+    </div>
+  </mat-step>
+  <mat-step label="Crop">
+    <ng-container *ngIf="image != null">
+      <div class="step">
+        <image-cropper #cropper [imageBase64]="image"></image-cropper>
+        <div>
+          <button mat-button (click)="reset()">Reset</button>
+          <button mat-button (click)="crop()">Crop</button>
+        </div>
+      </div>
+    </ng-container>
+  </mat-step>
+  <mat-step label="Result">
+    <div class="step">
+      <p>Image</p>
+      <img [src]="image" alt="">
+      <p>Cropped Image</p>
+      <img [src]="croppedImage" alt="">
+      <div>
+        <button mat-button (click)="reset()">Reset</button>
+      </div>
+    </div>
+  </mat-step>
+</mat-stepper>
